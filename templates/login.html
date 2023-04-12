@@ -1,0 +1,32 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+  <!-- Page Header -->
+    <div class="top-container" style="background-image: url('{{ url_for('static', filename='img/people-bg4.jpg')}}'); background-size: 100% 100%;">
+          <div class="page-heading">
+            Welcome Back! Log In!
+          </div>
+    </div>
+
+  <div class="white-container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto content">
+      {% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<p style="color: red"> {{ message }}
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
+        {{ wtf.quick_form(form, novalidate=True) }}
+
+      </div>
+    </div>
+  </div>
+
+
+{% include "footer.html" %}

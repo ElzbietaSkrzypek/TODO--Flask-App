@@ -1,0 +1,87 @@
+{% include "header.html" %}
+
+  <section class="advanced-container">
+
+    <h2 class="section-heading">Your All ToDo Lists</h2>
+    <br>
+    <br>
+
+    <div class="row">
+
+      <div class="col-lg-4 col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h3>CREATE NEW</h3>
+          </div>
+          <div class="card-body">
+            <a class="btn-default" type="button" href="{{url_for('get_all_todos')}}"> + check lisk</a>
+          </div>
+          <div class="card-body">
+            <a class="btn-default" type="button" href="{{url_for('create_new_task')}}"> + task</a>
+          </div>
+        </div>
+      </div>
+
+      {% for checklist in current_user.checklist: %}
+        <div class="col-lg-4 col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h3>{{checklist.text}}</h3>
+              </div>
+              <div class="card-body">
+                {% for author in checklist.author: %}
+                <img class="collaboratorImage" src="{{ author.email | gravatar }}" title="{{author.name}}"/>
+                {% endfor %}
+                <br><br>
+                {% for todo in checklist.todo: %}
+                <ul class="list-group mb-0">
+                  <li
+                    class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                    <div class="d-flex align-items-center">
+                      <i class="fa-regular {{todo.checkbox}}"></i>
+                      {% if todo.checkbox == "fa-square-check": %}
+                        <p style="text-decoration: line-through; margin: 0;">{{todo.text}}</p>
+                      {% else: %}
+                        <p style="text-decoration: none; margin: 0;">{{todo.text}}</p>
+                      {% endif %}
+                    </div>
+                      <i class="fas fa-times text-primary"></i>
+                  </li>
+                </ul>
+                {% endfor %}
+                <a class="btn-default" type="button" href="{{ url_for('edit_checklist', checklist_id=checklist.id) }}">Edit</a>
+              </div>
+            </div>
+          </div>
+         {% endfor %}
+         {% for task in current_user.tasks: %}
+        <div class="col-lg-4 col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3>{{task.text}}</h3>
+            </div>
+            <div class="card-body">
+              {% for author in task.author: %}
+                <img class="collaboratorImage" src="{{ author.email | gravatar }}" title="{{author.name}}"/>
+                {% endfor %}
+              <br><br>
+                {% for subtask in task.subtasks: %}
+                <div class="d-flex align-items-center">
+                  <p style="text-decoration: none; margin: 1%;">{{subtask.text|safe}}</p>
+                </div>
+                {% endfor %}
+                <a class="btn-default" type="button" href="{{ url_for('show_task', task_id=task.id) }}">Edit</a>
+
+            </div>
+            </div>
+          </div>
+        {% endfor %}
+
+
+
+    </div>
+
+  </section>
+
+
+{% include "footer.html" %}

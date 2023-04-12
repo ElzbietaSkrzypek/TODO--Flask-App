@@ -1,0 +1,273 @@
+body {
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  font-family: "Ubuntu";
+  color: #40514E;
+}
+
+hr {
+  border: dotted #263159 6px;
+  border-bottom: none;
+  width: 4%;
+  display:inline-block;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Ubuntu"
+  font-size: 5.65rem;
+  color: #263159;
+  line-height: 2;
+}
+
+h2 {
+  font-family: "Ubuntu"
+  font-size: 2.5rem;
+  font-weight: normal;
+  color: #251749;
+}
+
+h3 {
+  color: #263159;
+}
+
+h4, h5 {
+  color: #263159;
+  font-weight: normal;
+}
+
+
+p {
+  color: #40514E;
+}
+
+
+a {
+  color: #de607f;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0%, 5%, 0%, 5%;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #40514E;
+}
+
+
+/* button */
+button {
+  border: 1px #de607f;
+  border-radius: 4px;
+    }
+
+.btn-default {
+  border: 1px #de607f;
+  border-radius: 4px;
+  font-family: Courier New;
+  color: #7B2869;
+  font-size: 16px;
+  background: #de607f;
+  padding: 6px 15px 10px 20px;
+  text-decoration: none;
+  margin: 1%;
+}
+
+.btn-default:hover {
+  background: #f5dea9;
+  text-decoration: none;
+}
+
+.btn {
+  border: 1px #de607f;
+  border-radius: 4px;
+  font-family: Courier New;
+  padding: 6px 15px 10px 20px;
+  text-decoration: none;
+  margin: 1%;
+}
+
+a:not([href]):not([class]), a:not([href]):not([class]):hover {
+    color: #de607f;
+    text-decoration: none;
+}
+
+/* TOP CONTAINER */
+
+.top-container {
+  width: 100%;
+  padding-top: 15%;
+  padding-bottom: 15%;
+}
+
+
+.navbar-brand {
+  font-family: "Ubuntu";
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #372948;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+  z-index: 1;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #FFFBEB;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 1,5rem;
+}
+
+.navbar a:hover {
+  /* background: #ddd; */
+  text-decoration-color: black;
+}
+
+
+.inl-block {
+  display: inline-block;
+}
+
+
+/* MIDDLE CONTAINER */
+
+.middle-container {
+  padding: 5% 15%;
+  background-color: #FFECEF;
+}
+
+.black-container {
+  color: white;
+  font-size: 1.5rem;
+  padding: 5% 15%;
+  background-color: black;
+}
+
+.white-container {
+  color: black;
+  font-size: 1.5rem;
+  padding: 5% 15%;
+  background-color: white;
+}
+
+.page-heading {
+    font-size: 3rem;
+    color: white;
+    backdrop-filter: blur(20px);
+}
+
+.advanced-container {
+    background-color: #FFECEF;
+    padding: 7% 0;
+}
+
+/* Cards */
+.card {
+    margin: 2%;
+    }
+
+.row {
+    margin: 0;
+}
+
+/* Table */
+table {
+    width: 100%;
+}
+
+.mb-4 {
+  margin-bottom: 0rem!important;
+}
+
+.subtask-text {
+    color: #de607f;
+}
+
+.collaboratorImage {
+    width: 7%;
+    float: left;
+    margin-right: 1%;
+}
+
+/* Comments */
+.commenterImage {
+  width: 10%;
+  float: left;
+  margin-right: 3%;
+}
+
+.commentAutor {
+    text-align: left;
+    text-decoration: underline;
+    color: grey;
+    font-size: 1rem;
+}
+
+.commentText {
+    text-align: left;
+    color: black;
+    font-size: 1.5rem;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*  BOTTOM CONTAINER */
+
+.bottom-container {
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  padding: 2%;
+  font-family: 'Montserrat', sans-serif;
+  position: absolute;
+}
+
+.footer-icon {
+  width: 2%;
+  padding: 1%;
+}
+
+.owner {
+  margin-bottom: 0;
+  color: #263159;
+  padding-top: 1.5%;
+}
+
+
+@media (max-width: 1000px) {
+  .middle-container {
+    padding: 10%;
+  }
+  .advanced-container {
+    padding: 15% 0;
+  }
+  .navbar-toggler-icon, .navbar-collapse, .navbar-brand, h2{
+    font-size: 3rem;
+  }
+  h3, h4 {
+    font-size: xx-large;
+  }
+  .top-container {
+    padding-top: 23%;
+  }
+  h5, h6, p, .form-control, .btn, .btn-default, .mb-4, th {
+    font-size: x-large;
+  }
+  a {
+    font-size: xx-large;
+  }
+  }

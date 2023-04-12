@@ -1,0 +1,28 @@
+{% include "header.html" %}
+<section class="middle-container">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5">
+
+            <h1 class="mb-3">Welcome to TODO!</h1>
+            <h4 style="text-"> ✓ This is the place where you can manage your upcoming tasks and plans easily.<br>
+            ✓ Joining this community you can even share your tasks with collaborators!<br>
+            ✓ It is easy tool to help you with management, save your time and money!</h4>
+                <a class="btn-default" href="{{url_for('get_all_todos')}}" data-mdb-toggle="tooltip">Create basic TODO list</a>
+                {% if not current_user.is_authenticated: %}
+                <a class="btn-default" href="{{url_for('login')}}" data-mdb-toggle="tooltip">Log In for more features</a>
+                {% else: %}
+                <a class="btn-default" href="{{url_for('all_lists')}}" data-mdb-toggle="tooltip">Advanced options</a>
+                {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "footer.html" %}

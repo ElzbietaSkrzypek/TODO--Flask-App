@@ -1,0 +1,53 @@
+{% include "header.html" %}
+
+<section class="middle-container">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5">
+            <h1 class="mb-3">Your Basic Todo List</h1>
+
+            <form method="post" class="d-flex justify-content-center align-items-center mb-4" action="{{ url_for('add_todos') }}">
+              <div class="form-outline flex-fill">
+                <input type="text" id="text" name="text" class="form-control form-control-lg" placeholder="What do you need to do?" required/>
+              </div>
+                <button class="btn-default" type="submit">Add</button>
+            </form>
+
+            {% for todo in all_todos: %}
+            <ul class="list-group mb-0">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                <div class="d-flex align-items-center">
+                  <a href="{{url_for('set_checkbox', todo_id=todo.id)}}" data-mdb-toggle="tooltip" title="Mark as completed">
+                  <i class="fa-regular {{todo.checkbox}}"></i>
+                </a>
+                  {% if todo.checkbox == "fa-square-check": %}
+                    <p style="text-decoration: line-through; margin: 0;">{{todo.text}}</p>
+                  {% else: %}
+                    <p style="text-decoration: none; margin: 0;">{{todo.text}}</p>
+                  {% endif %}
+                </div>
+                <a href="{{url_for('delete_todos', todo_id=todo.id)}}" data-mdb-toggle="tooltip" title="Remove item">
+                  <i class="fas fa-times text-primary"></i>
+                </a>
+              </li>
+            </ul>
+            {% endfor %}
+            {% if not current_user.is_authenticated: %}
+            <a class="btn-default" href="{{url_for('login')}}" data-mdb-toggle="tooltip">Save</a>
+            {% else: %}
+            <a class="btn-default" href="{{url_for('create_new_checklist')}}" data-mdb-toggle="tooltip">Save</a>
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% include "footer.html" %}

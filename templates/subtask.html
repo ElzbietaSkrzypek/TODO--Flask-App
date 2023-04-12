@@ -1,0 +1,133 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+  <!-- Task Content -->
+<br>
+<br>
+  <section class="middle-container">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-14 col-xl-14">
+
+        <div class="card mask-custom">
+          <div class="card-body p-4">
+
+            <div class="text-center pt-3 pb-2">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
+                alt="Check" width="60">
+              <h2 class="my-4">{{subtask.text}}</h2>
+            </div>
+            <div style="overflow-x: auto;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Status</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Deadline</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="fw-normal">
+                  <td class="align-middle">
+                    {% if subtask.status== "New": %}
+                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{subtask.status|safe}}
+                    </button>
+                    {% elif subtask.status== "In Progress": %}
+                    <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{subtask.status|safe}}
+                    </button>
+                    {% elif subtask.status== "Completed": %}
+                    <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{subtask.status|safe}}
+                    </button>
+                    {% else: %}
+                    <button id="btnGroupDrop1" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{subtask.status|safe}}
+                    </button>
+                    {% endif %}
+                      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="{{url_for('set_status_new', subtask_id=subtask.id)}}">New</a>
+                        <a class="dropdown-item" href="{{url_for('set_status_inprogress', subtask_id=subtask.id)}}">In Progres</a>
+                        <a class="dropdown-item" href="{{url_for('set_status_completed', subtask_id=subtask.id)}}">Completed</a>
+                      </div>
+                  </td>
+                  <td class="align-middle">
+                    {% if subtask.priority== "Low": %}
+                    <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{subtask.priority|safe}}
+                    </button>
+                    {% elif subtask.priority== "Middle": %}
+                    <button id="btnGroupDrop1" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{subtask.priority|safe}}
+                    </button>
+                    {% elif subtask.priority== "High": %}
+                    <button id="btnGroupDrop1" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{subtask.priority|safe}}
+                    </button>
+                    {% else: %}
+                    <button id="btnGroupDrop1" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{subtask.priority|safe}}
+                    </button>
+                    {% endif %}
+                      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="{{url_for('set_status_low', subtask_id=subtask.id)}}">Low</a>
+                        <a class="dropdown-item" href="{{url_for('set_status_middle', subtask_id=subtask.id)}}">Middle</a>
+                        <a class="dropdown-item" href="{{url_for('set_status_high', subtask_id=subtask.id)}}">High</a>
+                      </div>
+                  </td>
+                  <td class="align-middle">
+                    <form method="post" class="d-flex justify-content-center align-items-center mb-4"
+                          action="{{ url_for('save_deadline', subtask_id=subtask.id) }}" novalidate>
+                      <input type="date" id="deadline" name="deadline" value="{{subtask.deadline}}">
+                        <button type="submit" data-mdb-toggle="tooltip" title="Save Deadline">
+                        <i class="fa-solid fa-check"></i>
+                        </button>
+                    </form>
+                  </td>
+                  <td class="align-middle">
+                    <a href="{{ url_for('delete_subtask', subtask_id=subtask.id, task_id=subtask.task_id) }}" data-mdb-toggle="tooltip" title="Remove"><i
+                        class="fas fa-trash-alt fa-lg text-warning"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+              </div>
+            <br>
+
+            <!--Comments Area -->
+            <h3>Comments</h3>
+              {% for comment in subtask.subtasks_comments: %}
+            <div class="row">
+            <div class="col-11 comment">
+              <ul class="commentList">
+                <li>
+                      <img class="commenterImage" src="{{ comment.sub_comment_author.email | gravatar }}"/>
+                      <div class="commentAutor">{{comment.sub_comment_author.name}}</div>
+                      <div class="commentText">{{comment.text|safe}}</div>
+                </li>
+              </ul>
+            </div>
+            <div class="col-1 comment">
+                      <a href="{{ url_for('delete_subtask_comment', subtask_id=subtask.id, comment_id=comment.id) }}"
+                         data-mdb-toggle="tooltip" title="Remove Comment">
+                        <i class="fas fa-times text-primary"></i></a></div>
+            </div>
+              {% endfor %}
+            <br>
+            <br>
+            {{ ckeditor.load() }}
+            {{ ckeditor.config(name='body') }}
+            {{ wtf.quick_form(form, novalidate=True) }}
+
+          </div>
+          <a class="btn-default" href="{{url_for('show_task', task_id=subtask.task_id)}}" data-mdb-toggle="tooltip">Save and back to Task</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "footer.html" %}

@@ -1,0 +1,23 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+  <!-- Task Content -->
+  <section class="middle-container">
+    <br>
+    <br>
+  <div class="container py-5 h-100">
+        <div class="card mask-custom">
+          <div class="card-body p-4 text-white">
+            <form method="post" class="d-flex justify-content-center align-items-center mb-4" action="{{ url_for('add_collaborators', task_id=task.id) }}">
+              <div class="form-outline flex-fill">
+                <input type="text" id='collaborator' name="collaborator" class="form-control form-control-lg" placeholder="type collaborator email" required/>
+              </div>
+              <button type="submit" class="btn-default" id="sendMessageButton">Add Collaborator</button>
+            </form>
+          </div>
+        </div>
+
+  </div>
+</section>
+
+{% include "footer.html" %}

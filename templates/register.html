@@ -1,0 +1,24 @@
+{% include "header.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+
+  <!-- Page Header -->
+    <div class="top-container" style="background-image: url('{{ url_for('static', filename='img/people-bg3.jpg')}}'); background-size: 100% 100%;">
+          <div class="page-heading">
+            Register
+          </div>
+    </div>
+
+  <div class="black-container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+       
+       {{ wtf.quick_form(form, novalidate=True) }}
+
+      </div>
+    </div>
+  </div>
+
+{% include "footer.html" %}

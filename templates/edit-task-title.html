@@ -1,0 +1,27 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+  <!-- Task Content -->
+  <section class="middle-container">
+    <br>
+    <br>
+  <div class="container py-5 h-100">
+        <div class="card mask-custom">
+          <div class="card-body p-4 text-white">
+            <form method="post" action="{{url_for('edit_task_title', task_id=task.id)}}">
+            <div class="text-center pt-3 pb-2">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
+                alt="Check" width="60">
+              <div class="form-outline flex-fill">
+                <input type="text" id="text" name="text" class="form-control form-control-lg" placeholder="{{task.text}}" required/>
+              </div>
+            </div>
+              <button type="submit" class="btn" id="sendMessageButton">Save Changes</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+</section>
+
+{% include "footer.html" %}

@@ -1,0 +1,60 @@
+{% include "header.html" %}
+
+<section class="middle-container">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5">
+            <div class="row">
+              <div class="col">
+                {% for author in checklist.author: %}
+                <img class="collaboratorImage" src="{{ author.email | gravatar }}" title="{{author.name}}"/>
+              {% endfor %}
+                <a class="collaboratorImage" href="{{ url_for('checklist_add_collaborators', checklist_id=checklist.id) }}" data-mdb-toggle="tooltip" title="Add Collaborator"><i class="fa-solid fa-user-plus"></i></a>
+              <br><p style="color: red; text-align: start;"> {{ message }}</p>
+              </div>
+            </div>
+            <h2 class="mb-3">{{checklist.text}}</h2><a href="{{url_for('edit_checklist_title', checklist_id=checklist.id)}}" data-mdb-toggle="tooltip" title="Edit Checklist Title"><i class="fa-solid fa-pen"></i></a>
+            <a href="{{ url_for('delete_checklist', checklist_id=checklist.id) }}" data-mdb-toggle="tooltip" title="Remove Checklist"><i
+                        class="fas fa-trash-alt fa-lg text-warning"></i></a>
+
+            <form method="post" class="d-flex justify-content-center align-items-center mb-4" action="{{ url_for('add_todo_checklist', checklist_id=checklist.id) }}">
+              <div class="form-outline flex-fill">
+                <input type="text" id="text" name="text" class="form-control form-control-lg" placeholder="What do you need to do?" required/>
+              </div>
+                <button type="submit" class="btn-default" id="sendMessageButton">Add</button>
+            </form>
+
+            {% for todo in checklist.todo: %}
+            <ul class="list-group mb-0">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                <div class="d-flex align-items-center">
+                  <a href="{{url_for('set_checkbox_todo', todo_id=todo.id, checklist_id=checklist.id)}}" data-mdb-toggle="tooltip" title="Mark as completed">
+                  <i class="fa-regular {{todo.checkbox}}"></i>
+                </a>
+                  {% if todo.checkbox == "fa-square-check": %}
+                    <p style="text-decoration: line-through; margin: 0;">{{todo.text}}</p>
+                  {% else: %}
+                    <p style="text-decoration: none; margin: 0;">{{todo.text}}</p>
+                  {% endif %}
+                </div>
+                <a href="{{url_for('checklist_todos_delete', todo_id=todo.id, checklist_id=checklist.id)}}" data-mdb-toggle="tooltip" title="Remove item">
+                  <i class="fas fa-times text-primary"></i>
+                </a>
+              </li>
+            </ul>
+            {% endfor %}
+            <a class="btn-default" href="{{url_for('all_lists')}}" data-mdb-toggle="tooltip">Save</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% include "footer.html" %}
